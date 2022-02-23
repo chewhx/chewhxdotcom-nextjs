@@ -1,3 +1,13 @@
+@import "./bootstrap";
+
+$fontWeights: (100, 200, 300, 400, 500, 600, 700, 800, 900);
+
+@each $weight in $fontWeights {
+  .fw-#{$weight} {
+    font-weight: $weight !important;
+  }
+}
+
 html,
 body {
   padding: 0;
