@@ -23,8 +23,8 @@ const items = [
   },
   {
     emoji: "🩸",
-    content: "type/javascript/typescript/nodejs/reactjs",
-    length: 5,
+    content: "type/javascript/typescript/nodejs/reactjs/nestjs",
+    length: 6,
     links: [null, null, null],
   },
 ];

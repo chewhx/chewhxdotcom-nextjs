@@ -9,6 +9,11 @@ const projects = [
     link: "https://www.npmjs.com/package/@chewhx/google-books",
     label: "@chewhx/google-books",
   },
+  {
+    icon: FaNpm,
+    link: "https://www.npmjs.com/package/react-bootstrap-button",
+    label: "react-bootstrap-button",
+  },
 ];
 
 const Projects: NextPage = () => {
