@@ -32,11 +32,11 @@ const EachScribble: NextPage<Props> = ({ page, blocks }) => {
           <Stack direction="horizontal" gap={3}>
             <p>
               📅 Created on{" "}
-              {dayjs(page.created_time).format("DD MMM YYYY, HH:mm A")}
+              {dayjs(page?.created_time).format("DD MMM YYYY, HH:mm A")}
             </p>
             <p>
               ✏️ Updated on{" "}
-              {dayjs(page.updated_time).format("DD MMM YYYY, HH:mm A")}
+              {dayjs(page?.updated_time).format("DD MMM YYYY, HH:mm A")}
             </p>
           </Stack>
           {page?.properties?.Tags?.multi_select && (
