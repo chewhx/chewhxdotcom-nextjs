@@ -1,12 +1,12 @@
 import type { AppProps } from "next/app";
-import Layout from "../components/layout";
+import AppContainer from "../layout/AppContainer";
 import "../styles/index.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
+    <AppContainer>
       <Component {...pageProps} />
-    </Layout>
+    </AppContainer>
   );
 }
 
