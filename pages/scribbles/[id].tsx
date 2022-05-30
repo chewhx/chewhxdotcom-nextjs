@@ -5,8 +5,14 @@ import { Render } from "@9gustin/react-notion-render";
 import dayjs from "dayjs";
 import { Badge, Button, Stack } from "react-bootstrap";
 import { FaChevronLeft } from "react-icons/fa";
+import { NextPage } from "next";
 
-const EachScribble = ({ page, blocks }) => {
+interface Props {
+  page: any;
+  blocks: any;
+}
+
+const EachScribble: NextPage<Props> = ({ page, blocks }) => {
   const router = useRouter();
   return (
     <>
@@ -35,7 +41,7 @@ const EachScribble = ({ page, blocks }) => {
           </Stack>
           {page?.properties?.Tags?.multi_select && (
             <Stack direction="horizontal" gap={2}>
-              {page?.properties?.Tags?.multi_select.map((e) => (
+              {page?.properties?.Tags?.multi_select.map((e: any) => (
                 <Badge
                   bg="white"
                   className="text-dark border border-dark"
@@ -65,7 +71,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (ctx) => {
+export const getStaticProps = async (ctx: any) => {
   const { id } = ctx.params;
   const page = await getPage(id);
   const blocks = await getBlocks(id);

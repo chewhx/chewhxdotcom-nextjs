@@ -7,7 +7,11 @@ import { getDatabase } from "../lib/notion";
 import { ListGroup } from "react-bootstrap";
 import Link from "next/link";
 
-const Home: NextPage = ({ posts }) => {
+interface Props {
+  posts: any;
+}
+
+const Home: NextPage<Props> = ({ posts }) => {
   return (
     <>
       <About />
@@ -17,7 +21,7 @@ const Home: NextPage = ({ posts }) => {
       <section className="py-3">
         <h1 className="display-5">/ scribbles</h1>
         <div className="list-group list-group-flush py-4">
-          {posts?.map((post) => (
+          {posts?.map((post: any) => (
             <ListGroup.Item className="px-0 py-3" key={post.id}>
               <Link href={`/scribbles/${post.id}`}>
                 <a className="h2 link-primary">

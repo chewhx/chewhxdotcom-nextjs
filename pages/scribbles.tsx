@@ -26,7 +26,7 @@ const Scribbles = ({ posts }: Props) => {
             </p>
             {post?.properties?.Tags?.multi_select && (
               <Stack direction="horizontal" gap={2}>
-                {post?.properties?.Tags?.multi_select.map((e) => (
+                {post?.properties?.Tags?.multi_select.map((e: any) => (
                   <Badge
                     bg="white"
                     className="text-dark border border-dark"
