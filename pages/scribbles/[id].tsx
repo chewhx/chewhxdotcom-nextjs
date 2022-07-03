@@ -103,6 +103,6 @@ export const getStaticProps = async (ctx: any) => {
       page,
       blocks,
     },
-    revalidate: 1,
+    revalidate: 60,
   };
 };

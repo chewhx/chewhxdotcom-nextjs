@@ -1,12 +1,12 @@
 import Image from "next/image";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import mongo, { getBookHighlights } from "../lib/mongo";
-import parse from "html-react-parser";
+import { getBookHighlights } from "../lib/mongo";
 import Link from "next/link";
+import { Highlight } from "../types/highlight.type";
 
 interface Props {
-  highlights: any[];
+  highlights: Highlight[];
 }
 
 const Highlights = ({ highlights }: Props) => {
@@ -37,12 +37,12 @@ const Highlights = ({ highlights }: Props) => {
           <div
             // style={{ height: "240px", position: "relative" }}
             className="g-col-6 g-col-md-3 highlight-bookcover-1 m-2"
-            key={each.id}
+            key={each?.id}
           >
             <div style={{ height: "240px", position: "relative" }}>
-              <Link passHref href={`/highlights/${each.id}`}>
+              <Link passHref href={`/highlights/${each?.id}`}>
                 <Image
-                  src={each.bookCover}
+                  src={each?.bookCover}
                   alt=""
                   layout="fill"
                   objectFit="contain"

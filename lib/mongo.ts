@@ -3,7 +3,9 @@ import dayjs from "dayjs";
 
 const mongo = new MongoClient(process.env.MONGO_URI || "");
 
-const collection = mongo.db("chewhx-local").collection("booknotes_emails");
+const collection = mongo
+  .db(process.env.MONGO_DB)
+  .collection("booknotes_emails");
 
 export default mongo;
 
