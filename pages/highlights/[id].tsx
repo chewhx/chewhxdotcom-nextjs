@@ -4,7 +4,11 @@ import { Container } from "react-bootstrap";
 import { getBookHighlightById, getBookHighlights } from "../../lib/mongo";
 import parse from "html-react-parser";
 
-const EachHighlight = ({ highlight }) => {
+interface Props {
+  highlight: any;
+}
+
+const EachHighlight = ({ highlight }: Props) => {
   return (
     <Container className="px-0 px-md-5" style={{ padding: "0 5em" }}>
       <div

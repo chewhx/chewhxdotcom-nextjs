@@ -5,7 +5,11 @@ import mongo, { getBookHighlights } from "../lib/mongo";
 import parse from "html-react-parser";
 import Link from "next/link";
 
-const Highlights = ({ highlights }) => {
+interface Props {
+  highlights: any[];
+}
+
+const Highlights = ({ highlights }: Props) => {
   return (
     <Container className="px-0" style={{ padding: "0 5em" }}>
       <h1 className="display-5">/ book highlights</h1>
