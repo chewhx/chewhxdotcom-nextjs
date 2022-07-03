@@ -1,65 +1,76 @@
 import React from "react";
 import { FaGithub, FaNpm } from "react-icons/fa";
-import { BsGlobe } from "react-icons/bs";
+import { BsGithub, BsGlobe } from "react-icons/bs";
+import { getGitHubRepo } from "../lib/octokit";
+import { Badge, Image, Stack } from "react-bootstrap";
 
-const projects = [
+const repos = [
+  { owner: "chewhx", repo: "react-bootstrap-button" },
   {
-    title: "LytePay for Freelancers",
-    tagline: "Financing solution for freelancers and self-employed",
-    links: [
-      {
-        icon: <BsGlobe />,
-        link: "https://www.lytepay.co/freelancers/",
-      },
-    ],
+    owner: "chewhx",
+    repo: "dotfiles",
   },
   {
-    title: "Bookstrap",
-    tagline: "Web application to curate reading list",
-    links: [
-      {
-        icon: <BsGlobe />,
-        link: "https://bookstrap-staging.netlify.app",
-      },
-    ],
-  },
-  {
-    title: "React-Bootstrap-Button",
-    tagline: "Quick save for adding bootstrap loading button on React",
-    links: [
-      {
-        icon: <FaNpm />,
-        link: "https://www.npmjs.com/package/react-bootstrap-button",
-      },
-    ],
-  },
-  {
-    title: ".dotfiles",
-    tagline: "My personal dotfiles",
-    links: [{ icon: <FaGithub />, link: "https://github.com/chewhx/dotfiles" }],
+    owner: "chewhx",
+    repo: "paynowqr",
   },
 ];
 
-const Project = () => {
+interface Props {
+  repos: any[];
+}
+
+const Project = ({ repos }: Props) => {
   return (
     <>
       <h1 className="display-5">/ project</h1>
-      <div className="list-group list-group-flush py-4">
-        {projects.map(({ title, tagline, links }) => (
-          <div className="list-group-item p-0 py-3" key={title}>
-            <h2>{title}</h2>
-            <p className="lead text-secondary">{tagline}</p>
-            {links.map(({ icon, link }) => (
+      <span>
+        Projects data fetched from{" "}
+        <a
+          href="https://docs.github.com/en/rest/repos/repos#get-a-repository"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          github api
+        </a>{" "}
+      </span>
+      {/* <pre>{JSON.stringify(repos, null, 2)}</pre> */}
+      <div className="list-group list-group-flush">
+        {repos.map(({ data }) => (
+          <div className="list-group-item p-0 py-5" key={data.id}>
+            <h2>
+              <BsGithub className="me-4" />
+              {data?.language === "Shell" ? (
+                <Image
+                  className="me-4"
+                  width="40px"
+                  alt={data?.language}
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg"
+                />
+              ) : data?.language === "TypeScript" ? (
+                <Image
+                  className="me-4"
+                  width="40px"
+                  alt={data?.language}
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                />
+              ) : null}
               <a
-                className="btn btn-outline-dark"
-                key={link}
-                href={link}
+                href={data?.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {icon}
+                {data.name}
               </a>
-            ))}
+            </h2>
+            <p className="lead text-secondary">{data?.description}</p>
+            <Stack className="flex-wrap" direction="horizontal" gap={2}>
+              {data?.topics?.map((topic: string) => (
+                <Badge pill bg="white" className="text-dark border" key={topic}>
+                  {topic}
+                </Badge>
+              ))}
+            </Stack>
           </div>
         ))}
       </div>
@@ -68,3 +79,15 @@ const Project = () => {
 };
 
 export default Project;
+
+export const getStaticProps = async () => {
+  const data = await Promise.all(
+    repos.map(async ({ owner, repo }) => await getGitHubRepo(owner, repo))
+  );
+  return {
+    props: {
+      repos: data,
+    },
+    revalidate: 60,
+  };
+};

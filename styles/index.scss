@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora&display=swap");
 @import "./bootstrap";
 
 $fontWeights: (100, 200, 300, 400, 500, 600, 700, 800, 900);
@@ -27,4 +28,44 @@ article > h1 {
 
 article > img {
   width: 100%;
+}
+
+.highlight {
+  margin: 1em 0 4em;
+
+  &-bookcover {
+    transition: all 0.2s ease;
+    transform: rotateZ(-10deg);
+    &:hover {
+      transform: rotateZ(+10deg);
+    }
+  }
+
+  &-bookcover-1 {
+    transition: all 0.2s ease;
+    &:nth-child(1n):hover {
+      transform: rotateZ(+10deg) scale(1.1);
+    }
+    &:nth-child(2n):hover {
+      transform: rotateZ(-10deg) scale(1.1);
+    }
+  }
+}
+
+mark {
+  font-size: 1.15rem;
+  font-family: "Lora", Georgia, "Times New Roman", Times, serif;
+  // quotes: "“" "”";
+
+  // &::before {
+  //   content: open-quote;
+  //   font-size: 1.5rem;
+  //   margin-right: 0.2em;
+  // }
+
+  // &::after {
+  //   content: close-quote;
+  //   font-size: 1.5rem;
+  //   margin-left: 0.2em;
+  // }
 }

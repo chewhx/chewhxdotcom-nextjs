@@ -7,6 +7,7 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
+  images: { domains: ["books.google.com"] },
 };
 
 module.exports = nextConfig;

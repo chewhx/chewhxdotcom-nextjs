@@ -86,7 +86,7 @@ const About = () => {
         and leaving the world better than I found it.
       </p>
       <p className="fs-3">
-        Currently a frontend developer at {" "}
+        Currently a frontend developer at{" "}
         <a
           href="https://www.lyteventures.com/"
           target="_blank"

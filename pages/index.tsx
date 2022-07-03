@@ -6,17 +6,19 @@ import Scribbles from "./scribbles";
 import { getDatabase } from "../lib/notion";
 import { ListGroup } from "react-bootstrap";
 import Link from "next/link";
+import { getGitHubRepo } from "../lib/octokit";
 
 interface Props {
   posts: any;
+  repos: any;
 }
 
-const Home: NextPage<Props> = ({ posts }) => {
+const Home: NextPage<Props> = ({ posts, repos }) => {
   return (
     <>
       <About />
       <section className="py-3">
-        <Project />
+        <Project repos={repos} />
       </section>
       <section className="py-3">
         <h1 className="display-5">/ scribbles</h1>
@@ -41,11 +43,27 @@ const Home: NextPage<Props> = ({ posts }) => {
 
 export default Home;
 
+const repos = [
+  { owner: "chewhx", repo: "react-bootstrap-button" },
+  {
+    owner: "chewhx",
+    repo: "dotfiles",
+  },
+  {
+    owner: "chewhx",
+    repo: "paynowqr",
+  },
+];
+
 export const getStaticProps = async () => {
   const db = await getDatabase(process.env.NOTION_DATABASE_ID || "");
+  const data = await Promise.all(
+    repos.map(async ({ owner, repo }) => await getGitHubRepo(owner, repo))
+  );
   return {
     props: {
       posts: db,
+      repos: data,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in

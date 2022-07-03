@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import useMediaQuery from "../lib/useMediaQuery";
 import { Button, Offcanvas } from "react-bootstrap";
 import { BsList } from "react-icons/bs";
+import { FaHighlighter } from "react-icons/fa";
 
 const navs = [
   { to: "/", label: "chewhx.com" },
@@ -40,6 +41,23 @@ const Navbar = () => {
               </Link>
             </li>
           ))}
+          <li className="nav-item">
+            <Link href="/highlights">
+              <a
+                className={clsx({
+                  "me-4": true,
+                  btn: true,
+                  "text-warning": !pathname.startsWith("/highlights"),
+                  "btn-warning":
+                    pathname === "highlights" ||
+                    pathname.startsWith("/highlights"),
+                })}
+              >
+                <FaHighlighter className="me-2" />
+                highlights
+              </a>
+            </Link>
+          </li>
         </ul>
       ) : (
         <>
@@ -94,6 +112,24 @@ const Navbar = () => {
                     </Link>
                   </li>
                 ))}
+                <li className="nav-item">
+                  <Link href="/highlights">
+                    <a
+                      className={clsx({
+                        "py-3": true,
+                        "my-2": true,
+                        btn: true,
+                        "text-warning": !pathname.startsWith("/highlights"),
+                        "btn-warning":
+                          pathname === "highlights" ||
+                          pathname.startsWith("/highlights"),
+                      })}
+                    >
+                      <FaHighlighter className="me-2" />
+                      highlights
+                    </a>
+                  </Link>
+                </li>
               </ul>
             </Offcanvas.Body>
           </Offcanvas>

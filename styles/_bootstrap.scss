@@ -14,6 +14,8 @@ $danger: #f43f5e;
 $light: #e2e8f0;
 $dark: #1e293b;
 
+$enable-cssgrid: true;
+
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../node_modules/bootstrap/scss/variables";
 
