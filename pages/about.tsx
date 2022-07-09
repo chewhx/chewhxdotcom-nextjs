@@ -1,7 +1,12 @@
+import Image, { ImageProps } from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button, Stack } from "react-bootstrap";
 import { BsLinkedin, BsFacebook, BsGithub } from "react-icons/bs";
+import technologist from "../assets/technologist.png";
+import singapore from "../assets/singapore.png";
+import nerdface from "../assets/nerdface.png";
+import zippermouth from "../assets/zippermouth.png";
 
 const socials = [
   {
@@ -44,12 +49,26 @@ const codeLanguages = [
   },
 ];
 
+const Emoji = ({ src }: ImageProps) => (
+  <div
+    style={{
+      display: "inline-flex",
+      padding: "0 0.3em",
+      alignContent: "center",
+    }}
+  >
+    <Image src={src} width="30px" height="30px" alt={`${src}-emoji`} />
+  </div>
+);
+
 const About = () => {
   return (
     <>
       <h1 className="display-3 py-4">Chew Han Xiang</h1>
       <p className="fs-3">
-        Hello World. I am a 👨🏻‍💻 developer based in sunny 🇸🇬 Singapore . Before I
+        Hello World. I am a
+        <Emoji src={technologist} />
+        developer based in sunny <Emoji src={singapore} /> Singapore . Before I
         started coding{" "}
         <span>
           {codeLanguages.map(({ label, classNames }, i) => (
@@ -66,7 +85,7 @@ const About = () => {
         , I was managing art programmes and studied for an accountancy degree.
       </p>
       <p className="fs-3">
-        I&apos;m a self-proclaimed 🤓{" "}
+        I&apos;m a self-proclaimed <Emoji src={nerdface} />
         <a
           href="https://davidepstein.com/the-range"
           target="_blank"
@@ -74,7 +93,7 @@ const About = () => {
         >
           generalist
         </a>{" "}
-        and tested 🤐{" "}
+        and tested <Emoji src={zippermouth} />
         <a
           href="https://www.16personalities.com/intj-personality"
           target="_blank"
