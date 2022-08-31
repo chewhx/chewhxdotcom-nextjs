@@ -1,12 +1,10 @@
+import { Box } from "@mantine/core";
 import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="py-5">
-      <div
-        className="container mx-auto px-5 px-lg-0"
-        style={{ maxWidth: "900px" }}
-      >
+    <footer style={{ padding: "3em 0" }}>
+      <Box>
         <p>
           By Chew Han Xiang. Created with{" "}
           <a
@@ -24,14 +22,6 @@ const Footer = () => {
           >
             Vercel
           </a>
-          . Styled with{" "}
-          <a
-            href="https://getbootstrap.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Bootstrap
-          </a>
           . Scribbles are hosted on{" "}
           <a
             href="https://www.notion.so/"
@@ -42,7 +32,7 @@ const Footer = () => {
           </a>
           .
         </p>
-      </div>
+      </Box>
     </footer>
   );
 };

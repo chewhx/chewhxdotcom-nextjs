@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
 import React from "react";
-import { getBlocks, getDatabase, getPage } from "../../lib/notion";
 import { Render } from "@9gustin/react-notion-render";
+import { Chip, Group, Stack, Text, Title } from "@mantine/core";
 import dayjs from "dayjs";
-import { Badge, Button, Stack } from "react-bootstrap";
-import { FaChevronLeft } from "react-icons/fa";
 import { NextPage } from "next";
+import { useRouter } from "next/router";
+import { TbCalendar, TbPencil } from "react-icons/tb";
+import { getBlocks, getDatabase, getPage } from "../../lib/notion";
 
 interface Props {
   page: any;
@@ -16,40 +16,34 @@ const EachScribble: NextPage<Props> = ({ page, blocks }) => {
   const router = useRouter();
   return (
     <>
-      <Button
-        className="mb-4"
-        variant="outline-primary"
-        onClick={() => router.back()}
-      >
-        <FaChevronLeft className="mb-1 me-2" />
-        Back
-      </Button>
       <article>
         <div className="mb-5">
-          <h1 className="display-5 mb-4 text-dark fw-700">
+          <Title sx={{ fontSize: "3rem" }} my="lg">
             {page?.properties?.Name?.title[0].plain_text}
-          </h1>
-          <Stack direction="horizontal" gap={3}>
-            <p>
-              📅 Created on{" "}
-              {dayjs(page?.created_time).format("DD MMM YYYY, HH:mm A")}
-            </p>
-            <p>
-              ✏️ Updated on{" "}
-              {dayjs(page?.updated_time).format("DD MMM YYYY, HH:mm A")}
-            </p>
-          </Stack>
+          </Title>
+          <Group>
+            <Group spacing={4}>
+              <TbCalendar />
+              <Text size="sm">
+                {dayjs(page?.created_time).format("DD MMM YYYY, HH:mm A")}
+              </Text>
+            </Group>
+            <Group spacing={4}>
+              <TbPencil />
+              <Text size="sm">
+                {dayjs(page?.updated_time).format("DD MMM YYYY, HH:mm A")}
+              </Text>
+            </Group>
+          </Group>
           {page?.properties?.Tags?.multi_select && (
-            <Stack direction="horizontal" gap={2}>
-              {page?.properties?.Tags?.multi_select.map((e: any) => (
-                <Badge
-                  bg="white"
-                  className="text-dark border border-dark"
-                  key={e.name}
-                >
-                  {e.name}
-                </Badge>
-              ))}
+            <Stack my="md">
+              <Chip.Group>
+                {page?.properties?.Tags?.multi_select.map((e: any) => (
+                  <Chip size="xs" key={e.name}>
+                    {e.name}
+                  </Chip>
+                ))}
+              </Chip.Group>
             </Stack>
           )}
         </div>

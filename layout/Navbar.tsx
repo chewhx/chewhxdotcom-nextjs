@@ -1,141 +1,158 @@
-import React from "react";
-import clsx from "clsx";
+import {
+  ActionIcon,
+  Button,
+  ButtonVariant,
+  Container,
+  Grid,
+  Group,
+  Menu,
+} from "@mantine/core";
+import { useViewportSize } from "@mantine/hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import useMediaQuery from "../lib/useMediaQuery";
-import { Button, Offcanvas } from "react-bootstrap";
-import { BsList } from "react-icons/bs";
-import { FaHighlighter } from "react-icons/fa";
+import React from "react";
+import {
+  FaAddressCard,
+  FaBars,
+  FaChevronLeft,
+  FaHighlighter,
+  FaHome,
+  FaSun,
+} from "react-icons/fa";
+import Connect from "../components/LetsConnect";
 
-const navs = [
-  { to: "/", label: "chewhx.com" },
-  { to: "/about", label: "/ about" },
-  { to: "/project", label: "/ project" },
-  { to: "/scribbles", label: "/ scribbles" },
-];
+interface Props {
+  toggleColorScheme: () => void;
+}
 
-const Navbar = () => {
-  const { pathname } = useRouter();
-  const [show, setShow] = React.useState<boolean>(false);
-  const matches = useMediaQuery("(min-width: 576px)");
+const Navbar = ({ toggleColorScheme }: Props) => {
+  const [opened, setOpened] = React.useState<boolean>(false);
+  const { pathname, route } = useRouter();
+  const { width } = useViewportSize();
+  const isBroken = width <= 750;
+  const isHome = route === "/";
+
+  const navLinks = React.useMemo(
+    () => [
+      {
+        id: "book-highlights",
+        icon: <FaHighlighter />,
+        label: "Book Highlights",
+        props: { color: "yellow", variant: "subtle" },
+        type: "link",
+        href: "/highlights",
+      },
+      {
+        id: "lets-connect",
+        icon: <FaAddressCard />,
+        label: "Let's Connect",
+        props: { color: "blue", variant: "subtle" },
+        type: "action",
+        onClick: () => setOpened((p) => !p),
+      },
+    ],
+    []
+  );
+
   return (
-    <nav
-      className="container mx-auto py-5 px-5 px-lg-0"
-      style={{ maxWidth: "900px" }}
-    >
-      {matches ? (
-        <ul className="nav nav-pills mx-auto">
-          {navs.map(({ label, to }) => (
-            <li className="nav-item" key={to}>
-              <Link href={to}>
-                <a
-                  className={clsx({
-                    "nav-link": true,
-                    "me-4": true,
-                    active:
-                      to === "/" ? pathname === to : pathname.startsWith(to),
-                  })}
-                >
-                  {label}
-                </a>
-              </Link>
-            </li>
-          ))}
-          <li className="nav-item">
-            <Link href="/highlights">
-              <a
-                className={clsx({
-                  "me-4": true,
-                  btn: true,
-                  "text-warning": !pathname.startsWith("/highlights"),
-                  "btn-warning":
-                    pathname === "highlights" ||
-                    pathname.startsWith("/highlights"),
-                })}
-              >
-                <FaHighlighter className="me-2" />
-                highlights
-              </a>
+    <Container py="xl">
+      <Connect opened={opened} setOpened={setOpened} />
+      <Grid>
+        {/* <Grid.Col span={6} p={0}>
+          {!isHome && (
+            <Link passHref href="/">
+              <ActionIcon variant="subtle" style={{ display: "inline-flex" }}>
+                <FaHome />
+              </ActionIcon>
             </Link>
-          </li>
-        </ul>
-      ) : (
-        <>
-          <ul className="nav nav-pills mx-auto">
-            <div className="nav-item me-4">
-              <Button variant="outline-primary" onClick={() => setShow(true)}>
-                <BsList />
-              </Button>
-            </div>
-            {navs.slice(0, 1).map(({ label, to }) => (
-              <li className="nav-item" key={to}>
-                <Link href={to}>
-                  <a
-                    className={clsx({
-                      "nav-link": true,
-                      "me-4": true,
-                      active: true,
-                    })}
-                  >
-                    {label}
-                  </a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Offcanvas show={show} onHide={() => setShow(false)}>
-            <Offcanvas.Header closeButton>
-              <Offcanvas.Title>chewhx.com</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-              <ul className="nav nav-pills mx-auto flex-column">
-                {navs.slice(1).map(({ label, to }) => (
-                  <li
-                    className="nav-item"
-                    key={to}
-                    onClick={() => setShow(false)}
-                  >
-                    <Link href={to}>
-                      <a
-                        className={clsx({
-                          "nav-link": true,
-                          "py-3": true,
-                          "my-2": true,
-                          active:
-                            to === "/"
-                              ? pathname === to
-                              : pathname.startsWith(to),
-                        })}
+          )}
+          {isBroken && (
+            <Menu position="bottom-start">
+              <Menu.Target>
+                <ActionIcon style={{ display: "inline-flex" }}>
+                  <FaBars />
+                </ActionIcon>
+              </Menu.Target>
+              <Menu.Dropdown>
+                {navLinks.map(({ icon, label, props, href, id, type }) => {
+                  switch (type) {
+                    case "link":
+                      return (
+                        <Link passHref key={id} href={href || ""}>
+                          <Menu.Item icon={icon} color={props.color}>
+                            {label}
+                          </Menu.Item>
+                        </Link>
+                      );
+                    case "action":
+                      return (
+                        <Menu.Item
+                          key={id}
+                          icon={icon}
+                          color={props.color}
+                          onClick={() => setOpened((p) => !p)}
+                        >
+                          {label}
+                        </Menu.Item>
+                      );
+
+                    default:
+                      return null;
+                  }
+                })}
+              </Menu.Dropdown>
+            </Menu>
+          )}
+          {!isBroken &&
+            navLinks.map(({ icon, label, props, href, id, type }) => {
+              switch (type) {
+                case "link":
+                  return (
+                    <Link passHref href={href || ""} key={id}>
+                      <Button
+                        leftIcon={icon}
+                        color={props.color}
+                        variant={props.variant as ButtonVariant}
                       >
                         {label}
-                      </a>
+                      </Button>
                     </Link>
-                  </li>
-                ))}
-                <li className="nav-item">
-                  <Link href="/highlights">
-                    <a
-                      className={clsx({
-                        "py-3": true,
-                        "my-2": true,
-                        btn: true,
-                        "text-warning": !pathname.startsWith("/highlights"),
-                        "btn-warning":
-                          pathname === "highlights" ||
-                          pathname.startsWith("/highlights"),
-                      })}
+                  );
+                case "action":
+                  return (
+                    <Button
+                      key={id}
+                      leftIcon={icon}
+                      color={props.color}
+                      variant={props.variant as ButtonVariant}
+                      onClick={() => setOpened((p) => !p)}
                     >
-                      <FaHighlighter className="me-2" />
-                      highlights
-                    </a>
-                  </Link>
-                </li>
-              </ul>
-            </Offcanvas.Body>
-          </Offcanvas>
-        </>
-      )}
-    </nav>
+                      {label}
+                    </Button>
+                  );
+
+                default:
+                  return null;
+              }
+            })}
+        </Grid.Col> */}
+        <Group spacing={20}>
+          {!isHome && (
+            <Link passHref href="/">
+              <ActionIcon variant="outline">
+                <FaChevronLeft />
+              </ActionIcon>
+            </Link>
+          )}
+          <ActionIcon
+            // style={{ marginLeft: "auto" }}
+            onClick={toggleColorScheme}
+          >
+            <FaSun />
+          </ActionIcon>
+        </Group>
+      </Grid>
+    </Container>
   );
 };
 

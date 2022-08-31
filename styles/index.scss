@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lora&display=swap");
-@import "./bootstrap";
+@import url("http://fonts.cdnfonts.com/css/satoshi");
 
 $fontWeights: (100, 200, 300, 400, 500, 600, 700, 800, 900);
 
@@ -10,12 +10,14 @@ $fontWeights: (100, 200, 300, 400, 500, 600, 700, 800, 900);
   }
 }
 
-html,
-body {
-  padding: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
-  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 * {
@@ -42,30 +44,19 @@ article > img {
   }
 
   &-bookcover-1 {
-    transition: all 0.2s ease;
-    &:nth-child(1n):hover {
-      transform: rotateZ(+10deg) scale(1.1);
+    & img {
+      transition: all 0.2s ease;
     }
-    &:nth-child(2n):hover {
-      transform: rotateZ(-10deg) scale(1.1);
+
+    &:hover img {
+      transform: rotateZ(+10deg) scale(0.9);
     }
   }
 }
 
 mark {
   font-size: 1.15rem;
+  font-weight: 600;
+  padding: 5px;
   font-family: "Lora", Georgia, "Times New Roman", Times, serif;
-  // quotes: "“" "”";
-
-  // &::before {
-  //   content: open-quote;
-  //   font-size: 1.5rem;
-  //   margin-right: 0.2em;
-  // }
-
-  // &::after {
-  //   content: close-quote;
-  //   font-size: 1.5rem;
-  //   margin-left: 0.2em;
-  // }
 }
