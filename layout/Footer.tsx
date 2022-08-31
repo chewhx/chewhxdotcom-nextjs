@@ -1,4 +1,4 @@
-import { Box } from "@mantine/core";
+import { Anchor, Box } from "@mantine/core";
 import React from "react";
 
 const Footer = () => {
@@ -7,29 +7,29 @@ const Footer = () => {
       <Box>
         <p>
           By Chew Han Xiang. Created with{" "}
-          <a
+          <Anchor
             href="https://nextjs.org/"
             target="_blank"
             rel="noopener noreferrer"
           >
             NextJS
-          </a>
+          </Anchor>
           . Hosted on{" "}
-          <a
+          <Anchor
             href="https://vercel.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
             Vercel
-          </a>
+          </Anchor>
           . Scribbles are hosted on{" "}
-          <a
+          <Anchor
             href="https://www.notion.so/"
             target="_blank"
             rel="noopener noreferrer"
           >
             Notion
-          </a>
+          </Anchor>
           .
         </p>
       </Box>

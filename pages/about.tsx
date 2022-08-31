@@ -1,23 +1,16 @@
-import Image, { ImageProps } from "next/image";
-import Link from "next/link";
 import React from "react";
-import { BsLinkedin, BsFacebook, BsGithub } from "react-icons/bs";
-import technologist from "../assets/technologist.png";
-import singapore from "../assets/singapore.png";
-import nerdface from "../assets/nerdface.png";
-import zippermouth from "../assets/zippermouth.png";
-import memoji from "../assets/memoji.png";
 import {
   ActionIcon,
-  Avatar,
-  Card,
   Grid,
   Group,
-  SimpleGrid,
   Stack,
   Text,
+  Title,
   useMantineTheme,
 } from "@mantine/core";
+import Image, { ImageProps } from "next/image";
+import { BsFacebook, BsGithub, BsLinkedin } from "react-icons/bs";
+import memoji from "../assets/memoji.png";
 import Label from "../layout/Label";
 
 const socials = [
@@ -37,41 +30,6 @@ const socials = [
     link: "https://github.com/chewhx",
   },
 ];
-
-const codeLanguages = [
-  {
-    label: "JavaScript",
-    classNames: "bg-warning text-dark",
-  },
-  {
-    label: "Typescript",
-    classNames: "bg-primary",
-  },
-  {
-    label: "React",
-    classNames: "text-info border border-info",
-  },
-  {
-    label: "Node/Express",
-    classNames: "text-success border border-success",
-  },
-  {
-    label: "NestJS",
-    classNames: "text-danger border border-danger",
-  },
-];
-
-const Emoji = ({ src }: ImageProps) => (
-  <div
-    style={{
-      display: "inline-flex",
-      padding: "0 0.3em",
-      alignContent: "center",
-    }}
-  >
-    <Image src={src} width="20px" height="20px" alt={`${src}-emoji`} />
-  </div>
-);
 
 const About = () => {
   const theme = useMantineTheme();
@@ -96,8 +54,8 @@ const About = () => {
           />
         </div>
         <Stack spacing={0} justify="center">
-          <h2 style={{ margin: 0 }}>Chew Han Xiang</h2>
-          <p style={{ margin: 0 }}>Software Engineer, Generalist, INTJ</p>
+          <Title>Chew Han Xiang</Title>
+          <Text>Software Engineer, Generalist, INTJ</Text>
           <Group>
             {socials.map(({ label, link, icon }) => (
               <div className="col-auto" key={label}>

@@ -21,21 +21,21 @@ const Highlights = ({ highlights }: Props) => {
         <Grid.Col sm={10}>
           <Text size="sm">
             Inspired by{" "}
-            <a
+            <Anchor
               href="https://highlights.sawyerh.com/"
               target="_blank"
               rel="noopener noreferrer"
             >
               Sawyer Hollenshead
-            </a>{" "}
+            </Anchor>{" "}
             and{" "}
-            <a
+            <Anchor
               href="https://aliabdaal.com/book-notes/"
               target="_blank"
               rel="noopener noreferrer"
             >
               Ali Abdaal
-            </a>{" "}
+            </Anchor>{" "}
           </Text>
 
           {highlights?.map((each) => (

@@ -8,8 +8,20 @@ const AppContainer: React.FC = ({ children }) => {
   const [colorScheme, setColorScheme] = React.useState<"light" | "dark">(
     "light"
   );
+
+  React.useEffect(() => {
+    const preferDarkTheme = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+
+    if (preferDarkTheme) {
+      setColorScheme("dark");
+    }
+  }, []);
+
   const toggleColorScheme = () =>
     colorScheme === "light" ? setColorScheme("dark") : setColorScheme("light");
+
   return (
     <MantineProvider
       withGlobalStyles
@@ -26,7 +38,7 @@ const AppContainer: React.FC = ({ children }) => {
         <link rel="icon" href="favicon/favicon.ico" />
       </Head>
       <Container style={{ maxWidth: "850px" }}>
-        <Navbar toggleColorScheme={toggleColorScheme} />
+        <Navbar toggleColorScheme={toggleColorScheme} colorScheme={colorScheme}/>
         <main>{children}</main>
         <Footer />
       </Container>

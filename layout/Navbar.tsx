@@ -1,35 +1,19 @@
-import {
-  ActionIcon,
-  Button,
-  ButtonVariant,
-  Container,
-  Grid,
-  Group,
-  Menu,
-} from "@mantine/core";
-import { useViewportSize } from "@mantine/hooks";
+import { ActionIcon, Container, Grid, Group, Switch } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import {
-  FaAddressCard,
-  FaBars,
-  FaChevronLeft,
-  FaHighlighter,
-  FaHome,
-  FaSun,
-} from "react-icons/fa";
+import { FaAddressCard, FaChevronLeft, FaHighlighter } from "react-icons/fa";
 import Connect from "../components/LetsConnect";
 
 interface Props {
   toggleColorScheme: () => void;
+  colorScheme: "dark" | "light";
 }
 
-const Navbar = ({ toggleColorScheme }: Props) => {
+const Navbar = ({ toggleColorScheme, colorScheme }: Props) => {
   const [opened, setOpened] = React.useState<boolean>(false);
-  const { pathname, route } = useRouter();
-  const { width } = useViewportSize();
-  const isBroken = width <= 750;
+  const { route } = useRouter();
+  const isDark = colorScheme === "dark";
   const isHome = route === "/";
 
   const navLinks = React.useMemo(
@@ -144,12 +128,14 @@ const Navbar = ({ toggleColorScheme }: Props) => {
               </ActionIcon>
             </Link>
           )}
-          <ActionIcon
-            // style={{ marginLeft: "auto" }}
-            onClick={toggleColorScheme}
-          >
-            <FaSun />
-          </ActionIcon>
+          <Switch
+            color="gray"
+            checked={isDark}
+            onChange={toggleColorScheme}
+            size="md"
+            onLabel="D"
+            offLabel="L"
+          />
         </Group>
       </Grid>
     </Container>
