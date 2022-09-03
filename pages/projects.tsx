@@ -94,6 +94,7 @@ export default Projects;
 
 export const projectRepos = [
   { owner: "chewhx", repo: "react-bootstrap-button" },
+  { owner: "chewhx", repo: "cra-template-chewhx" },
   {
     owner: "chewhx",
     repo: "dotfiles",
