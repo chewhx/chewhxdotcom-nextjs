@@ -34,7 +34,7 @@ const AppContainer: React.FC = ({ children }) => {
         withNormalizeCSS
         theme={{
           colorScheme,
-          fontFamily: `-apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+          fontFamily: `Satoshi, Space Grotesk,-apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif`,
         }}
       >

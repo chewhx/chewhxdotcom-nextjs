@@ -3,7 +3,6 @@ import { Render } from "@9gustin/react-notion-render";
 import { Chip, Group, Stack, Text, Title } from "@mantine/core";
 import dayjs from "dayjs";
 import { NextPage } from "next";
-import { useRouter } from "next/router";
 import { TbCalendar, TbPencil } from "react-icons/tb";
 import { getBlocks, getDatabase, getPage } from "../../lib/notion";
 
@@ -13,7 +12,6 @@ interface Props {
 }
 
 const EachScribble: NextPage<Props> = ({ page, blocks }) => {
-  const router = useRouter();
   return (
     <>
       <article>
@@ -50,7 +48,7 @@ const EachScribble: NextPage<Props> = ({ page, blocks }) => {
         {page && <Render blocks={blocks.results} simpleTitles />}
       </article>
       {/* <pre>{JSON.stringify(page, null, 2)}</pre> */}
-      {/* <pre>{JSON.stringify(blocks, null, 2)}</pre> */}
+      <pre>{JSON.stringify(blocks, null, 2)}</pre>
     </>
   );
 };

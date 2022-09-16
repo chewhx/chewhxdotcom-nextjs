@@ -7,17 +7,20 @@ import About from "./about";
 import Highlights from "./highlights";
 import Projects, { projectRepos } from "./projects";
 import Scribbles from "./scribbles";
+import Tools, { toolingRepos } from "./tools";
 
 interface Props {
   posts: any;
   repos: any;
+  tools: any;
   highlights: any;
 }
 
-const Home: NextPage<Props> = ({ posts, repos, highlights }) => {
+const Home: NextPage<Props> = ({ posts, repos, tools, highlights }) => {
   return (
     <>
       <About />
+      <Tools repos={tools} />
       <Projects repos={repos} />
       <Scribbles posts={posts} />
       <Highlights highlights={highlights} />
@@ -34,11 +37,18 @@ export const getStaticProps = async () => {
       async ({ owner, repo }) => await getGitHubRepo(owner, repo)
     )
   );
+
+  const tools = await Promise.all(
+    toolingRepos.map(
+      async ({ owner, repo }) => await getGitHubRepo(owner, repo)
+    )
+  );
   const highlights = await getBookHighlights();
   return {
     props: {
       posts: db,
       repos: data,
+      tools,
       highlights,
     },
     // Next.js will attempt to re-generate the page:
