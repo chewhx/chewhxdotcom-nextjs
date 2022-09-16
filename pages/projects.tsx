@@ -1,6 +1,5 @@
 import React from "react";
 import { Anchor, Box, Grid, Group, Text } from "@mantine/core";
-import Link from "next/link";
 import { TbPackage } from "react-icons/tb";
 import { getGitHubRepo } from "../lib/octokit";
 import Label from "../layout/Label";
@@ -18,18 +17,18 @@ const Projects = ({ repos }: Props) => {
       <Grid.Col sm={10}>
         {repos?.map(({ data }) => (
           <Box key={data?.id} mb="lg">
-            <Link passHref href={data?.html_url}>
+            <Group spacing={4}>
+              <TbPackage />
               <Anchor
+                href={data?.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{ fontWeight: 600 }}
+                color="dark"
               >
-                <Group spacing={4}>
-                  <TbPackage />
-                  {data?.name}
-                </Group>
+                {data?.name}
               </Anchor>
-            </Link>
+            </Group>
             <Text size="sm">{data?.description}</Text>
           </Box>
         ))}

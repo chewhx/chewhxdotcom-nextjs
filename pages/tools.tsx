@@ -1,8 +1,8 @@
-import { Anchor, Box, Grid, Group, Text } from "@mantine/core";
-import Link from "next/link";
 import React from "react";
-import { TbApps } from "react-icons/tb";
+import { Anchor, Box, Grid, Group, Text } from "@mantine/core";
+import { TbTools } from "react-icons/tb";
 import Label from "../layout/Label";
+import { getGitHubRepo } from "../lib/octokit";
 
 interface Props {
   repos?: any[];
@@ -23,18 +23,18 @@ const Tools = ({ repos }: Props) => {
       <Grid.Col sm={10}>
         {repos?.map(({ data }) => (
           <Box key={data?.id} mb="lg">
-            <Link passHref href={data?.html_url}>
+            <Group spacing={4}>
+              <TbTools />
               <Anchor
+                href={data?.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{ fontWeight: 600 }}
+                color="dark"
               >
-                <Group spacing={4}>
-                  <TbApps />
-                  {data?.name}
-                </Group>
+                {data?.name}
               </Anchor>
-            </Link>
+            </Group>
             <Text size="sm">{data?.description}</Text>
           </Box>
         ))}
@@ -44,3 +44,17 @@ const Tools = ({ repos }: Props) => {
 };
 
 export default Tools;
+
+export const getStaticProps = async () => {
+  const data = await Promise.all(
+    toolingRepos.map(
+      async ({ owner, repo }) => await getGitHubRepo(owner, repo)
+    )
+  );
+  return {
+    props: {
+      repos: data,
+    },
+    revalidate: 60,
+  };
+};
