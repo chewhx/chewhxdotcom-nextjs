@@ -20,7 +20,7 @@ const Scribbles = ({ posts }: Props) => {
             {posts?.map((post) => (
               <Grid.Col key={post.id}>
                 <Link passHref href={`/scribbles/${post.id}`}>
-                  <Anchor style={{ fontWeight: 600 }}>
+                  <Anchor style={{ fontWeight: 600 }} color="dark">
                     {post?.properties?.Name?.title[0]?.plain_text + "  "}
                     &#8594;
                   </Anchor>
@@ -28,19 +28,6 @@ const Scribbles = ({ posts }: Props) => {
                 <Text size="sm">
                   {post?.properties?.Tagline?.rich_text[0]?.plain_text}
                 </Text>
-                {/* {post?.properties?.Tags?.multi_select && (
-                  <Group>
-                    {post?.properties?.Tags?.multi_select.map((e: any) => (
-                      <Badge
-                        bg="white"
-                        className="text-dark border border-dark"
-                        key={e.name}
-                      >
-                        {e.name}
-                      </Badge>
-                    ))}
-                  </Group>
-                )} */}
               </Grid.Col>
             ))}
           </Grid>
